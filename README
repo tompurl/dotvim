@@ -4,5 +4,12 @@ Installation:
 
 Create Symlinks
 
-        ln -s ~/dotfiles/vimrc ~/.vimrc
-        ln -s ~/dotfiles/gvimrc ~/.gvimrc
+        ln -s ~/.vim/vimrc ~/.vimrc
+        ln -s ~/.vim/gvimrc ~/.gvimrc
+
+git submodule add http://github.com/tpope/vim-fugitive.git bundle/fugitive-head
+git push
+
+git pull
+git submodule init
+git submodule update
