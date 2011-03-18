@@ -1,0 +1,3 @@
+[submodule "bundle/gundo-head"]
+	path = bundle/gundo-head
+	url = http://github.com/sjl/gundo.vim.git
