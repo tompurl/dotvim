@@ -1,0 +1,19 @@
+
+" There options are required by vimwiki.
+set nocompatible
+filetype plugin on
+syntax on
+
+set encoding=utf-8
+
+" Load only system and vimwiki's scripts.
+set runtimepath=../src,$VIMRUNTIME
+
+" Build help tags.
+" helptags src/doc
+
+" Use directories within 'test' for storing wiki and html.
+let wiki = {}
+let wiki.path = getcwd().'/wiki'
+let wiki.path_html = getcwd().'/html'
+let g:vimwiki_list = [wiki]

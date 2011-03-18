@@ -1,0 +1,14 @@
+<!-- comment -->
+{{{
+<!-- not a comment -->
+}}}
+
+<!--
+{{{
+not a preformatted block -->
+}}}
+
+{{{
+<!-- not a comment again
+}}}
+-->

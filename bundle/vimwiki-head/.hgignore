@@ -1,0 +1,9 @@
+\.pyc$
+\.gz$
+\.zip$
+\.vba$
+\.netrw.*
+^sandbox/wiki$
+^sandbox/html$
+^src/doc/tags$
+^tests/html$

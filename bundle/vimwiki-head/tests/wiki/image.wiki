@@ -1,0 +1,7 @@
+http://example.com/image.jpg
+http://example.com/image.jpeg
+http://example.com/image.png
+http://example.com/image.gif
+http://example.com/image.tif
+http://example.com/image.bmp
+http://example.com/image.ico
