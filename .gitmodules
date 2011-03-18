@@ -7,3 +7,9 @@
 [submodule "bundle/nerdtree-head"]
 	path = bundle/nerdtree-head
 	url = https://github.com/scrooloose/nerdtree.git
+[submodule "bundule/apj-head"]
+	path = bundule/apj-head
+	url = git://github.com/tompurl/apj.git
+[submodule "bundle/apj-head"]
+	path = bundle/apj-head
+	url = git://github.com/tompurl/apj.git
