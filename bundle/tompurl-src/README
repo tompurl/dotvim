@@ -1,0 +1,9 @@
+This directory is for projects that don't store their vim-related code under
+the root of their project directory. For example, the vimwiki project keeps
+it's vim code under $VIMWIKI_ROOT/src folder. Because of this, if you store
+the $VIMWIKI_ROOT directory under your pathogen bundle directory, then 
+you won't be able to use vimwiki.
+
+Instead, I put those types of project folders under this src folder and then
+create a symlink to the folder that contains the vim code directly under
+my bundle folder.
