@@ -1,4 +1,17 @@
-Installation:
+= Installation =
+
+== Overview ==
+
+This shows you how to install a copy of the vim-related files that I use. It's
+probably not too terribly useful if you're not me, but it's a nice selection
+of Vim plugins and tricks if you want to give it a test drive.
+
+Please note that these instructions or *NOT* complete. They are still a
+work-in-progress while I learn the basics of git.
+
+== Linux/Mac ==
+
+Download files
 
         git clone git://github.com/tompurl/dotvim.git ~/.vim
 
@@ -6,10 +19,27 @@ Create Symlinks
 
         ln -s ~/.vim/vimrc ~/.vimrc
         ln -s ~/.vim/gvimrc ~/.gvimrc
+        git submodule init
+        git submodule update
 
-git submodule add http://github.com/tpope/vim-fugitive.git bundle/fugitive-head
-git push
+== Windows ==
 
-git pull
-git submodule init
-git submodule update
+=== Prereqs ===
+
+0. Do all of the normal githubby stuff, like registering your ssh key and such.
+1. Install msys-git
+2. Perform all of these steps from git-bash.bat
+3. Make sure that you set your http-proxy properly if necessary. Please see the
+   following links for details:
+   * https://jmjpro.wordpress.com/2011/01/07/github-behind-corporate-proxy/
+   * Also, please note that you *have* to include the port number, even if it's
+     80.
+
+Now things are done in a very Mac/Linux-y sort of way:
+
+        $ cd ~
+        $ git clone git://github.com/tompurl/dotvim.git ~/vimfiles
+        $ ln -s ~/_vimrc ~/vimrc
+        $ ln -s ~/_gvimrc ~/gvimrc
+        git submodule init
+        git submodule update
