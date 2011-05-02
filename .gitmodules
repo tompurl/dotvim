@@ -1,12 +1,9 @@
 [submodule "bundle/gundo-head"]
 	path = bundle/gundo-head
-	url = http://github.com/sjl/gundo.vim.git
+	url = http://github.com:sjl/gundo.vim.git
 [submodule "bundle/nerdcommenter-head"]
 	path = bundle/nerdcommenter-head
-	url = https://github.com/scrooloose/nerdcommenter.git
+	url = https://github.com:scrooloose/nerdcommenter.git
 [submodule "bundle/nerdtree-head"]
 	path = bundle/nerdtree-head
-	url = https://github.com/scrooloose/nerdtree.git
-[submodule "bundle/apj-head"]
-	path = bundle/apj-head
-	url = git://github.com/tompurl/apj.git
+	url = https://github.com:scrooloose/nerdtree.git
