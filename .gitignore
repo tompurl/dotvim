@@ -3,3 +3,4 @@
 *.swo
 spell/*
 .netrwhist
+bundle/link-*

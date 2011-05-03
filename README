@@ -17,12 +17,21 @@ Download files
 
 Create Symlinks
 
-        ln -s ~/.vim/vimrc ~/.vimrc
-        ln -s ~/.vim/gvimrc ~/.gvimrc
-        git submodule init
-        git submodule update
+        $ cd ~ 
+        $ ln -s ~/.vim/vimrc ~/.vimrc
+        $ ln -s ~/.vim/gvimrc ~/.gvimrc
+        $ git submodule init
+        $ git submodule update
+        $ ln -s ~/.vim/bundle/tompurl-src/vimwiki-head/src/ ~/.vim/bundle/link-vimwiki-head
+        $ ln -s ~/.vim/bundle/tompurl-src/conque-head/ ~/.vim/bundle/link-conque-head
 
 == Windows ==
+
+=== Overview ===
+
+Please note that these instructions will help you use the *Windows* version of
+Vim and gVim, not the Cygwin version. We do however need to use a bash shell to
+set everything up properly.
 
 === Prereqs ===
 
@@ -41,5 +50,7 @@ Now things are done in a very Mac/Linux-y sort of way:
         $ git clone git://github.com/tompurl/dotvim.git ~/vimfiles
         $ ln -s ~/_vimrc ~/vimrc
         $ ln -s ~/_gvimrc ~/gvimrc
-        git submodule init
-        git submodule update
+        $ git submodule init
+        $ git submodule update
+        $ ln -s ~/vimfiles/bundle/tompurl-src/vimwiki-head/src/ ~/vimfiles/bundle/link-vimwiki-head
+        $ ln -s ~/vimfiles/bundle/tompurl-src/conque-head/ ~/vimfiles/bundle/link-conque-head
