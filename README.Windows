@@ -1,0 +1,23 @@
+= README.Windows =
+
+A collection of instructions on using Windows to access this repository.
+
+== Clones Of HTTPS RW Address ==
+
+I used the intructions from the NeilAlexander comment on the following page to
+fix my certificate-related curl errors:
+
+* https://github.com/blog/642-smart-http-support
+
+First, everything that you do against git must be done using msysgit, and you
+must use the git-bash executeable.
+
+Next, if you use a proxy server, then you need to set the `https_proxy`
+environment var. You can do this using the following process (using git-bash):
+
+1. Create a ~/.bashrc file if it doesn't alredy exist.
+2. Add "export https_proxy=http://some-proxy:8080" to the file.
+  * Please noe that your url and port numbers will probably be different.
+3. Close and re-open git-bash.
+4. Set your global git config option using the following command:
+  * git config --global http.sslverify false
