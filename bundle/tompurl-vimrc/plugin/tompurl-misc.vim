@@ -1,8 +1,18 @@
+if has('win32')
+    let onWindows = 1
+endif
+
 set nowrap
 set expandtab
 set shiftwidth=4
 :map gf :e <cfile><CR>
-let &verbosefile = "/tmp/vim_debug.out"
+
+if onWindows
+    let &verbosefile = "C:/temp/vim_debug.out"
+else
+    let &verbosefile = "/tmp/vim_debug.out"
+endif
+
 :map <leader>en :cd %:p:h <Bar> new<Space>
 set shortmess=a "no more hitting enter to continue
 map <leader>ma <ESC>:set filetype=mail<CR>
