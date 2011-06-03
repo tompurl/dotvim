@@ -10,6 +10,3 @@
 [submodule "bundle/apj-head"]
 	path = bundle/apj-head
 	url = https://github.com/tompurl/apj.git
-[submodule "bundle/bash-support-head"]
-	path = bundle/bash-support-head
-	url = https://github.com/vim-scripts/bash-support.vim.git
