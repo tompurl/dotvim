@@ -50,6 +50,7 @@ if has("autocmd")
   " Pathogen
   filetype off
   call pathogen#runtime_append_all_bundles() 
+  call pathogen#helptags()
 
   " Enable file type detection.
   " Use the default filetype settings, so that mail gets 'tw' set to 72,
