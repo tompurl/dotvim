@@ -17,3 +17,6 @@ nmap <silent> <Leader>dv <ESC>:call TurnOnDevSettings()<CR>
 nmap <silent> <Leader>do <ESC>:call TurnOffDevSettings()<CR>
 
 nmap <silent> <Leader>cd <ESC>:cd %:h<CR>
+
+" JSON
+au! BufRead,BufNewFile *.json set filetype=json foldmethod=syntax
