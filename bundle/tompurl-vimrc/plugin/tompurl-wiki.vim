@@ -4,7 +4,8 @@ imap <leader>tt <ESC>"=strftime(" -- TomPurl %Y-%m-%d")<CR>Pi
 
 "===vimwiki settings
 let g:vimwiki_list = [{'path': '$HOME/gtd/wiki', 'path_html': '$HOME/gtd/wiki_html'}]
-let g:vimwiki_folding = 1
+"let g:vimwiki_folding = 1
+let g:vimwiki_folding = 0
 
 "===Wiki markup macros
 nnoremap <leader>h1 ^i= <esc>A =<esc>^

@@ -1,5 +1,6 @@
 function SetEmailSettings()
-    set filetype=email
+    colo default
+    set filetype=mail
     colo default
 endfunction
 
