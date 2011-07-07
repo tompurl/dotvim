@@ -1,5 +1,4 @@
 nmap <silent> <Leader>tl :Tlist<CR>
-let NERDShutUp=1
        
 function TurnOnDevSettings()
     set number
@@ -20,3 +19,7 @@ nmap <silent> <Leader>cd <ESC>:cd %:h<CR>
 
 " Nerdtree stuff
 nnoremap <Leader>nt  :NERDTree<CR>
+let NERDShutUp=1
+
+" JSON
+au! BufRead,BufNewFile *.json set filetype=json foldmethod=syntax

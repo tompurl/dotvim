@@ -10,3 +10,6 @@
 [submodule "bundle/apj-head"]
 	path = bundle/apj-head
 	url = https://github.com/tompurl/apj.git
+[submodule "bundle/vst-head"]
+	path = bundle/vst-head
+	url = https://github.com/vim-scripts/VST.git
