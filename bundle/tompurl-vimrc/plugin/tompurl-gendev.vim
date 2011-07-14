@@ -18,7 +18,7 @@ nmap <silent> <Leader>do <ESC>:call TurnOffDevSettings()<CR>
 nmap <silent> <Leader>cd <ESC>:cd %:h<CR>
 
 " Nerdtree stuff
-nnoremap <Leader>nt  :NERDTree<CR>
+nnoremap <Leader>nt  :NERDTreeToggle<CR>
 let NERDShutUp=1
 
 " JSON
