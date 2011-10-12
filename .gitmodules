@@ -13,3 +13,6 @@
 [submodule "bundle/vst-head"]
 	path = bundle/vst-head
 	url = https://github.com/vim-scripts/VST.git
+[submodule "vimroom"]
+	path = vimroom
+	url = https://github.com/mikewest/vimroom.git
