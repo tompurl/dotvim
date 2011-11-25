@@ -23,3 +23,7 @@ let NERDShutUp=1
 
 " JSON
 au! BufRead,BufNewFile *.json set filetype=json foldmethod=syntax
+
+" Vagrant
+au! BufRead,BufNewFile *.pp set filetype=ruby
+
