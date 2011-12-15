@@ -22,3 +22,22 @@ set visualbell
 "Timestamp scripts
 nmap <leader>ts "=strftime("@ %H:%M")<CR>P
 imap <leader>ts <ESC>"=strftime("@ %H:%M")<CR>Pi
+
+"Open this file from any other file
+"Only works on Linux/Mac
+let myvimrc = "$HOME/.vim/bundle/tompurl-vimrc/plugin/tompurl-misc.vim"
+:nnoremap <leader>ev :execute "vsplit " . myvimrc <cr>
+:nnoremap <leader>sv :execute "source " . myvimrc <cr>
+
+"Some simple abbreviations
+:iabbrev @@ tom@tompurl.com 
+:iabbrev ssig --<CR>Tom Purl<cr>tom@tompurl.com
+
+""""""lvsthw chapter 9
+""" Wrap words or selections in double-quotes
+:nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+" FIXME Does not work if the last selected char is the last char in the line.
+:vnoremap <leader>" lvi"<esc>gv`<vi"<esc>
+""" Wrap words or selections in single-quotes
+:nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
+
