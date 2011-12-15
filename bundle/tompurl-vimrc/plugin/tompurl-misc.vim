@@ -44,3 +44,7 @@ let myvimrc = "$HOME/.vim/bundle/tompurl-vimrc/plugin/tompurl-misc.vim"
 :nnoremap H ^
 " L moves to the end of the line in normal mode
 :nnoremap L $
+
+""""""lvsthw chapter 10
+" Nothing for me to do here. I am already using caps lock instead of escape,
+">and I map it at an OS level.
