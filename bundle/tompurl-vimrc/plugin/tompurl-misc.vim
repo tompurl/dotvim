@@ -40,4 +40,7 @@ let myvimrc = "$HOME/.vim/bundle/tompurl-vimrc/plugin/tompurl-misc.vim"
 :vnoremap <leader>" lvi"<esc>gv`<vi"<esc>
 """ Wrap words or selections in single-quotes
 :nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
-
+" H moves to the beginning of the line in normal mode
+:nnoremap H ^
+" L moves to the end of the line in normal mode
+:nnoremap L $
