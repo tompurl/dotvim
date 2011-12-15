@@ -3,6 +3,12 @@
 " The turns on spell check in all of my markdown documents.
 :autocmd FileType markdown setlocal spell
 
+"""" LVSTHW Chapter 13 Exercises
+" Create a \"snippet\" abbreviation 
+" This creates a YAML front matter header for a blog post. After the snippet
+">is written, the title placeholder of the header will be visually selected.
+:autocmd FileType markdown :iabbrev <buffer> yfm ---<cr>layout: post<cr>title: TODO<cr>published: true<cr>type: post<cr>status: publish<cr>---<esc>kkkkeellveh
+
 """" Create links
 " Wrap a single word if the cursor is on the first character
 :nnoremap <leader>ml i[<ESC>eli](http://TODO)
