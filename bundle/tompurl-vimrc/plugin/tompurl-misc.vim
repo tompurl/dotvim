@@ -56,3 +56,7 @@ augroup filetype_vim
     au FileType vim iabbrev <buffer> nf " TODO Short description ----------- {{{<cr><esc>xxifunction! TODO()<cr>echom "Hello!"<cr>endfunction<cr>" }}}
 augroup END
 " }}}
+
+"""""lvsthw chapter 28
+" Add a mapping that opens the previous buffer in a split of your choosing
+:nnoremap <leader>bp :execute "rightbelow vsplit " . bufname("#") <cr>
