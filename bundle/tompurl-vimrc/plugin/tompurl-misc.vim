@@ -48,3 +48,11 @@ let myvimrc = "$HOME/.vim/bundle/tompurl-vimrc/plugin/tompurl-misc.vim"
 """"""lvsthw chapter 10
 " Nothing for me to do here. I am already using caps lock instead of escape,
 ">and I map it at an OS level.
+
+" Vimscript file settings ------------------------- {{{
+augroup filetype_vim
+    au!
+    au FileType vim setlocal foldmethod=marker
+    au FileType vim iabbrev <buffer> nf " TODO Short description ----------- {{{<cr><esc>xxifunction! TODO()<cr>echom "Hello!"<cr>endfunction<cr>" }}}
+augroup END
+" }}}
