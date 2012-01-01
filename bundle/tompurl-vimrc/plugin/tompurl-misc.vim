@@ -60,3 +60,17 @@ augroup END
 """""lvsthw chapter 28
 " Add a mapping that opens the previous buffer in a split of your choosing
 :nnoremap <leader>bp :execute "rightbelow vsplit " . bufname("#") <cr>
+
+"""""Start special settings for gpg diary files
+" First, let's create the filetype
+augroup filetypedetect_gpg
+    au!
+    au! BufRead,BufNewFile *.gpg setfiletype gpg
+augroup END
+
+" Now let's set some options
+augroup filetype_gpg
+    au!
+    au FileType gpg setlocal spell
+augroup END
+" }}}

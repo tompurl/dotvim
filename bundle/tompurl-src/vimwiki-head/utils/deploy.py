@@ -1,3 +1,4 @@
+#! /usr/bin/python
 """
 Vimwiki deployment script.
     * Make Vimball archive (vba) file in DEPLOY_DIR directory.
@@ -6,7 +7,7 @@ Vimwiki deployment script.
     * gz vba file into 'DEPLOY_DIR/vimwiki-{VERSION}.vba.gz'
 """
 
-# from __future__ import print_function
+from __future__ import print_function
 import os
 import glob
 import shutil
@@ -31,18 +32,25 @@ def get_vimwiki_version():
             if r:
                 return r.groups()[0]
 
+
+def vimwiki_files(src_dir):
+    for root, dirs, files in os.walk(src_dir):
+        root = root.replace(src_dir, '')
+        for f in files:
+            if f.endswith(('.vim','.txt','.css','.tpl')):
+                f = os.path.join(root, f)
+                yield f
+
+
 def make_vba_file(src_dir, vba_file_name):
     try:
         os.makedirs(os.path.dirname(vba_file_name))
     except:
         pass
 
-    inc_names = []
-    for file in glob.glob(os.path.join(src_dir, "**/*")):
-        file = os.path.normpath(file)
-        file = os.sep.join(file.split(os.sep)[-2:])
-        inc_names.append(file)
+    inc_names = [f for f in vimwiki_files(src_dir)]
     vba.mk_vimball(src_dir, inc_names, vba_file_name)
+
 
 def make_zip_folder(folder, arcname):
     try:
@@ -51,10 +59,8 @@ def make_zip_folder(folder, arcname):
         pass
 
     arc = zipfile.ZipFile(arcname, "w")
-    for file in glob.glob(os.path.join(folder, "*", "*")):
-        afile = os.path.normpath(file)
-        afile = os.sep.join(afile.split(os.sep)[-2:])
-        arc.write(file, afile, zipfile.ZIP_DEFLATED)
+    for f in vimwiki_files(folder):
+        arc.write(os.path.join(folder, f), f, zipfile.ZIP_DEFLATED)
     arc.close()
 
 
@@ -76,27 +82,27 @@ def make_gzip_vba(vba_name, full_vba_name):
 
 if __name__ == "__main__":
     ver = get_vimwiki_version().replace('.', '-')
-    print("Getting vimwiki version: {}".format(ver))
+    print("Getting vimwiki version: {0}".format(ver))
 
     vba_name = "vimwiki-{0}.vba".format(ver)
     path_vba_name = os.path.join(DEPLOY_DIR, vba_name)
-    print("Creating vba file: {}".format(path_vba_name))
+    print("Creating vba file: {0}".format(path_vba_name))
     make_vba_file(SRC_DIR, path_vba_name)
 
     zip_name = "vimwiki-{0}.zip".format(ver)
     path_zip_name = os.path.join(DEPLOY_DIR, zip_name)
-    print("Packing src files into: {}".format(path_zip_name))
+    print("Packing src files into: {0}".format(path_zip_name))
     make_zip_folder(SRC_DIR, path_zip_name)
 
     zip_dev_name = "vimwiki-dev-{0}.zip".format(date.today().isoformat())
     path_zip_dev_name = os.path.join(DEPLOY_DIR, zip_dev_name)
     shutil.copy(path_zip_name, path_zip_dev_name)
-    print("Making dev package: {}".format(path_zip_dev_name))
+    print("Making dev package: {0}".format(path_zip_dev_name))
 
     zip_vba_name = "vimwiki-{0}-vba.zip".format(ver)
     path_zip_vba_name = os.path.join(DEPLOY_DIR, zip_vba_name)
-    print("Packing vba file into: {}".format(path_zip_vba_name))
+    print("Packing vba file into: {0}".format(path_zip_vba_name))
     make_zip_vba(vba_name, path_zip_vba_name)
 
-    print("Packing vba file into: {}".format(path_vba_name+".gz"))
+    print("Packing vba file into: {0}".format(path_vba_name+".gz"))
     make_gzip_vba(vba_name, path_vba_name)

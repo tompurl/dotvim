@@ -15,19 +15,19 @@ def mk_single_vimball(path, fname):
     return result
 
 # python 3k
-def mk_vimball(path, fnames, vba_name):
-    with open(vba_name, "w", newline='\n') as vba_file:
-        lines = mk_header()
-        for fname in fnames:
-            lines.extend(mk_single_vimball(path, fname))
-        for line in lines:
-            vba_file.write(line+'\n')
-
-# python 2.6
 # def mk_vimball(path, fnames, vba_name):
-    # with open(vba_name, "wb") as vba_file:
+    # with open(vba_name, "w", newline='\n') as vba_file:
         # lines = mk_header()
         # for fname in fnames:
             # lines.extend(mk_single_vimball(path, fname))
         # for line in lines:
             # vba_file.write(line+'\n')
+
+# python 2.6
+def mk_vimball(path, fnames, vba_name):
+    with open(vba_name, "wb") as vba_file:
+        lines = mk_header()
+        for fname in fnames:
+            lines.extend(mk_single_vimball(path, fname))
+        for line in lines:
+            vba_file.write(line+'\n')

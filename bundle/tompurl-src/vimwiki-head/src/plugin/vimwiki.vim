@@ -19,22 +19,32 @@ function! s:default(varname, value) "{{{
   endif
 endfunction "}}}
 
-" return longest common prefix of 2 given strings.
-" 'Hello world', 'Hello worm' => 'Hello wor'
-function! s:str_common_pfx(str1, str2) "{{{
+" return longest common path prefix of 2 given paths.
+" '~/home/usrname/wiki', '~/home/usrname/wiki/shmiki' => '~/home/usrname/wiki'
+function! s:path_common_pfx(path1, path2) "{{{
+  let p1 = split(a:path1, '[/\\]', 1)
+  let p2 = split(a:path2, '[/\\]', 1)
+
   let idx = 0
-  let minlen = min([len(a:str1), len(a:str2)])
-  while (idx < minlen) && (a:str1[idx] ==? a:str2[idx])
+  let minlen = min([len(p1), len(p2)])
+  while (idx < minlen) && (p1[idx] ==? p2[idx])
     let idx = idx + 1
   endwhile
-  return strpart(a:str1, 0, idx)
+  if idx == 0
+    return ''
+  else
+    return join(p1[: idx-1], '/')
+  endif
 endfunction "}}}
 
 function! s:find_wiki(path) "{{{
+  " ensure that we are not fooled by a symbolic link
+  let realpath = resolve(vimwiki#base#chomp_slash(a:path))
   let idx = 0
   while idx < len(g:vimwiki_list)
-    let path = vimwiki#chomp_slash(expand(VimwikiGet('path', idx)))
-    if s:str_common_pfx(path, a:path) == path
+    let path = vimwiki#base#chomp_slash(expand(VimwikiGet('path', idx)))
+    let path = vimwiki#base#path_norm(path)
+    if s:path_common_pfx(path, realpath) == path
       return idx
     endif
     let idx += 1
@@ -96,11 +106,14 @@ function! s:setup_buffer_enter() "{{{
 
   " If you have
   "     au GUIEnter * VimwikiIndex
-  " in your vimrc the next line is essential.
-  setf vimwiki
+  " Then change it to
+  "     au GUIEnter * nested VimwikiIndex
+  if &filetype == ''
+    set filetype=vimwiki
+  endif
 
   " Update existed/non-existed links highlighting.
-  call vimwiki#highlight_links()
+  call vimwiki#base#highlight_links()
 
   " Settings foldmethod, foldexpr and foldtext are local to window. Thus in a
   " new tab with the same buffer folding is reset to vim defaults. So we
@@ -147,7 +160,7 @@ function! VimwikiGet(option, ...) "{{{
   if a:option == 'path' || a:option == 'path_html'
     let p = g:vimwiki_list[idx][a:option]
     " resolve doesn't work quite right with symlinks ended with / or \
-    let p = substitute(p, '[/\\]\+$', '', '')
+    let p = vimwiki#base#chomp_slash(p)
     let p = resolve(expand(p))
     let g:vimwiki_list[idx][a:option] = p.'/'
   endif
@@ -173,16 +186,13 @@ endfunction "}}}
 " User can redefine it.
 if !exists("*VimwikiWeblinkHandler") "{{{
   function VimwikiWeblinkHandler(weblink)
-    for browser in g:vimwiki_browsers
-      if executable(browser)
-        if has("win32")
-          execute '!start "'.browser.'" "' . a:weblink . '"'
-        else
-          execute '!'.browser.' "' . a:weblink . '"'
-        endif
-        return
-      endif
-    endfor
+    if has("win32")
+      execute '!start "' . a:weblink . '"'
+    elseif has("macunix")
+      execute '!open "' . a:weblink . '"'
+    else
+      execute '!xdg-open "' . a:weblink . '"'
+    endif
   endfunction
 endif "}}}
 " CALLBACK }}}
@@ -215,8 +225,8 @@ let s:vimwiki_defaults.diary_header = 'Diary'
 " Do not change this! Will wait till vim become more datetime awareable.
 let s:vimwiki_defaults.diary_link_fmt = '%Y-%m-%d'
 
-let s:vimwiki_defaults.diary_link_count = 4
-
+" custom_wiki2html
+let s:vimwiki_defaults.custom_wiki2html = ''
 "}}}
 
 " DEFAULT options {{{
@@ -228,7 +238,6 @@ else
   call s:default('upper', 'A-Z')
   call s:default('lower', 'a-z')
 endif
-call s:default('other', '0-9')
 call s:default('stripsym', '_')
 call s:default('badsyms', '')
 call s:default('auto_checkbox', 1)
@@ -238,28 +247,11 @@ call s:default('fold_trailing_empty_lines', 0)
 call s:default('fold_lists', 0)
 call s:default('menu', 'Vimwiki')
 call s:default('global_ext', 1)
-call s:default('hl_headers', 1)
+call s:default('hl_headers', 0)
 call s:default('hl_cb_checked', 0)
 call s:default('camel_case', 1)
 call s:default('list_ignore_newline', 1)
 call s:default('listsyms', ' .oOX')
-if has("win32")
-  call s:default('browsers',
-        \ [
-        \  expand('~').'\Local Settings\Application Data\Google\Chrome\Application\chrome.exe',
-        \  'C:\Program Files\Opera\opera.exe',
-        \  'C:\Program Files\Mozilla Firefox\firefox.exe',
-        \  'C:\Program Files\Internet Explorer\iexplore.exe',
-        \ ])
-else
-  call s:default('browsers',
-        \ [
-        \  'opera',
-        \  'firefox',
-        \  'konqueror',
-        \ ])
-endif
-
 call s:default('use_calendar', 1)
 call s:default('table_auto_fmt', 1)
 call s:default('w32_dir_enc', '')
@@ -271,29 +263,40 @@ call s:default('user_htmls', '')
 
 call s:default('html_header_numbering', 0)
 call s:default('html_header_numbering_sym', '')
-call s:default('conceallevel', 3)
+call s:default('conceallevel', 2)
+call s:default('url_mingain', 12)
+call s:default('url_maxsave', 12)
+call s:default('debug', 0)
+
+call s:default('diary_months', 
+      \ {
+      \ 1: 'January', 2: 'February', 3: 'March', 
+      \ 4: 'April', 5: 'May', 6: 'June',
+      \ 7: 'July', 8: 'August', 9: 'September',
+      \ 10: 'October', 11: 'November', 12: 'December'
+      \ })
+
 
 call s:default('current_idx', 0)
 
-let upp = g:vimwiki_upper
-let low = g:vimwiki_lower
-let oth = g:vimwiki_other
-let nup = low.oth
-let nlo = upp.oth
-let any = upp.nup
 
-let wword = '\C\<['.upp.']['.nlo.']*['.low.']['.nup.']*['.upp.']['.any.']*\>'
+let wword = '\C\<\%(['.g:vimwiki_upper.']['.g:vimwiki_lower.']\+\)\{2,}\>'
+" 1. match WikiWordURLs
 let g:vimwiki_rxWikiWord = '!\@<!'.wword
 let g:vimwiki_rxNoWikiWord = '!'.wword
 
+" 2. match a) [[PathURL]], or b) [[PathURL|DESCRIPTION]]
 let g:vimwiki_rxWikiLink1 = '\[\[[^\]]\+\]\]'
+" 3. match [[PathURL][DESCRIPTION]]
 let g:vimwiki_rxWikiLink2 = '\[\[[^\]]\+\]\[[^\]]\+\]\]'
+" ANY. match any WikiLink
 if g:vimwiki_camel_case
   let g:vimwiki_rxWikiLink = g:vimwiki_rxWikiWord.'\|'.
         \ g:vimwiki_rxWikiLink1.'\|'.g:vimwiki_rxWikiLink2
 else
   let g:vimwiki_rxWikiLink = g:vimwiki_rxWikiLink1.'\|'.g:vimwiki_rxWikiLink2
 endif
+" match a) WebURL, or b)"DESCRIPTION":WebURL, or c)"DESCRIPTION(MORE)":WebURL
 let g:vimwiki_rxWeblink = '\%("[^"(]\+\((\([^)]\+\))\)\?":\)\?'.
       \'\%('.
         \'\%('.
@@ -302,8 +305,8 @@ let g:vimwiki_rxWeblink = '\%("[^"(]\+\((\([^)]\+\))\)\?":\)\?'.
         \'\)'.
         \'\|\%(mailto:\)'.
       \'\)'.
-      \'\+[A-Za-z0-9:#@%/;,$~()_?+=.&\\\-]*'.
-      \'[().,?]\@<!'
+      \'\+\S\+'.
+      \'[().,?\]]\@<!'
 "}}}
 
 " AUTOCOMMANDS for all known wiki extensions {{{
@@ -332,32 +335,32 @@ augroup vimwiki
     " ColorScheme could have or could have not a
     " VimwikiHeader1..VimwikiHeader6 highlight groups. We need to refresh
     " syntax after colorscheme change.
-    exe 'autocmd ColorScheme *'.ext.' call vimwiki#setup_colors()'.
-          \ ' | call vimwiki#highlight_links()'
+    exe 'autocmd ColorScheme *'.ext.' syntax enable'.
+          \ ' | call vimwiki#base#highlight_links()'
 
     " Format tables when exit from insert mode. Do not use textwidth to
     " autowrap tables.
     if g:vimwiki_table_auto_fmt
-      exe 'autocmd InsertLeave *'.ext.' call vimwiki_tbl#format(line("."))'
-      exe 'autocmd InsertEnter *'.ext.' call vimwiki_tbl#reset_tw(line("."))'
+      exe 'autocmd InsertLeave *'.ext.' call vimwiki#tbl#format(line("."))'
+      exe 'autocmd InsertEnter *'.ext.' call vimwiki#tbl#reset_tw(line("."))'
     endif
   endfor
 augroup END
 "}}}
 
 " COMMANDS {{{
-command! VimwikiUISelect call vimwiki#ui_select()
+command! VimwikiUISelect call vimwiki#base#ui_select()
 command! -count VimwikiIndex
-      \ call vimwiki#goto_index(v:count1)
+      \ call vimwiki#base#goto_index(v:count1)
 command! -count VimwikiTabIndex tabedit <bar>
-      \ call vimwiki#goto_index(v:count1)
+      \ call vimwiki#base#goto_index(v:count1)
 
 command! -count VimwikiDiaryIndex
-      \ call vimwiki_diary#goto_index(v:count1)
+      \ call vimwiki#diary#goto_index(v:count1)
 command! -count VimwikiMakeDiaryNote
-      \ call vimwiki_diary#make_note(v:count1)
+      \ call vimwiki#diary#make_note(v:count1)
 command! -count VimwikiTabMakeDiaryNote tabedit <bar>
-      \ call vimwiki_diary#make_note(v:count1)
+      \ call vimwiki#diary#make_note(v:count1)
 "}}}
 
 " MAPPINGS {{{
@@ -401,9 +404,9 @@ function! s:build_menu(topmenu)
     let norm_path = fnamemodify(VimwikiGet('path', idx), ':h:t')
     let norm_path = escape(norm_path, '\ \.')
     execute 'menu '.a:topmenu.'.Open\ index.'.norm_path.
-          \ ' :call vimwiki#goto_index('.(idx + 1).')<CR>'
+          \ ' :call vimwiki#base#goto_index('.(idx + 1).')<CR>'
     execute 'menu '.a:topmenu.'.Open/Create\ diary\ note.'.norm_path.
-          \ ' :call vimwiki_diary#make_note('.(idx + 1).')<CR>'
+          \ ' :call vimwiki#diary#make_note('.(idx + 1).')<CR>'
     let idx += 1
   endwhile
 endfunction
@@ -425,8 +428,8 @@ endif
 
 " CALENDAR Hook "{{{
 if g:vimwiki_use_calendar
-  let g:calendar_action = 'vimwiki_diary#calendar_action'
-  let g:calendar_sign = 'vimwiki_diary#calendar_sign'
+  let g:calendar_action = 'vimwiki#diary#calendar_action'
+  let g:calendar_sign = 'vimwiki#diary#calendar_sign'
 endif
 "}}}
 
