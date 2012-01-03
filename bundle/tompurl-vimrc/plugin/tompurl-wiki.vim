@@ -3,7 +3,16 @@ nmap <leader>tt "=strftime(" -- TomPurl %Y-%m-%d")<CR>P
 imap <leader>tt <ESC>"=strftime(" -- TomPurl %Y-%m-%d")<CR>Pi
 
 "===vimwiki settings
-let g:vimwiki_list = [{'path': '$HOME/gtd/wiki', 'path_html': '$HOME/gtd/wiki_html'}]
+let wiki_1 = {}
+let wiki_1.path = "$HOME/gtd/wiki"
+let wiki_1.path_html = "$HOME/gtd/wiki_html"
+
+let wiki_2 = {}
+let wiki_2.path = "$HOME/gtd/vello"
+let wiki_2.path_html = "$HOME/gtd/vello_html"
+
+let g:vimwiki_list = [wiki_1, wiki_2]
+
 "let g:vimwiki_folding = 1
 let g:vimwiki_folding = 0
 
