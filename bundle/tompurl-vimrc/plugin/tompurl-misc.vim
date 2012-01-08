@@ -20,8 +20,10 @@ map <leader>cl <ESC>:clo<CR>
 set visualbell
 
 "Timestamp scripts
-nmap <leader>ts "=strftime("@ %H:%M")<CR>P
-imap <leader>ts <ESC>"=strftime("@ %H:%M")<CR>Pi
+"nmap <leader>ts "=strftime("@ %H:%M")<CR>P
+"imap <leader>ts <ESC>"=strftime("@ %H:%M")<CR>Pi
+iabbrev ts <ESC>"=strftime(" -- %y%m%d %T")<CR>PA
+
 
 "Open this file from any other file
 "Only works on Linux/Mac
