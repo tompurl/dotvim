@@ -5,3 +5,4 @@ spell/*
 .netrwhist
 bundle/link-*
 tags
+.VimballRecord

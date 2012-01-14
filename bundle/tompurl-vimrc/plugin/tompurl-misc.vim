@@ -76,3 +76,6 @@ augroup filetype_gpg
     au FileType gpg setlocal spell
 augroup END
 " }}}
+
+""" Twitvim stuff
+let twitvim_count = 200

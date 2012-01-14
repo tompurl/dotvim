@@ -19,3 +19,12 @@
 [submodule "bundle/vim-markdown"]
 	path = bundle/vim-markdown
 	url = https://github.com/tpope/vim-markdown.git
+[submodule "bundle/bash-support-head"]
+	path = bundle/bash-support-head
+	url = https://github.com/vim-scripts/bash-support.vim.git
+[submodule "bundle/vim-colos-solarized"]
+	path = bundle/vim-colos-solarized
+	url = https://github.com/altercation/vim-colors-solarized.git
+[submodule "bundle/vim-shell"]
+	path = bundle/vim-shell
+	url = https://github.com/xolox/vim-shell.git
