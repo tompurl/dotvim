@@ -28,3 +28,6 @@
 [submodule "bundle/vim-shell"]
 	path = bundle/vim-shell
 	url = https://github.com/xolox/vim-shell.git
+[submodule "bundle/vim-session-head"]
+	path = bundle/vim-session-head
+	url = https://github.com/xolox/vim-session.git
