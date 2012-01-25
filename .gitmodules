@@ -31,3 +31,6 @@
 [submodule "bundle/vim-session-head"]
 	path = bundle/vim-session-head
 	url = https://github.com/xolox/vim-session.git
+[submodule "bundle/todo.txt-vim-head"]
+	path = bundle/todo.txt-vim-head
+	url = https://github.com/davidoc/todo.txt-vim.git

@@ -1,5 +1,5 @@
 " ~/.vim/sessions/twitter.vim: Vim session script.
-" Created by session.vim 1.4.25 on 14 January 2012 at 20:31:53.
+" Created by session.vim 1.4.25 on 25 January 2012 at 13:47:12.
 " Open this file in Vim and run :source % to restore your session.
 
 set guioptions=aegimrLtT
@@ -26,7 +26,8 @@ set shortmess=aoO
 badd +62 ~/.vim/bundle/twitvim-0.7.2/doc/twitvim.txt
 badd +1 Twitter_1326508028
 badd +1 Twitter_1326508129
-badd +0 Twitter_1326508252
+badd +1 Twitter_1326508252
+badd +0 Twitter_1326594644
 silent! argdel *
 set lines=35 columns=100
 edit ~/.vim/bundle/twitvim-0.7.2/doc/twitvim.txt
@@ -55,16 +56,16 @@ setlocal fml=1
 setlocal fdn=20
 setlocal nofen
 silent! normal! zE
-let s:l = 62 - ((9 * winheight(0) + 5) / 10)
+let s:l = 1158 - ((4 * winheight(0) + 5) / 10)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-62
-normal! 01l
+1158
+normal! 02l
 wincmd w
 argglobal
 enew
-file Twitter_1326594644
+file Twitter_1327432731
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
