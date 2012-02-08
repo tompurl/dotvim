@@ -7,3 +7,4 @@ bundle/link-*
 tags
 .VimballRecord
 *.lock
+sessions/*
