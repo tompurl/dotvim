@@ -37,3 +37,6 @@
 [submodule "bundle/vim-calendar-head"]
 	path = bundle/vim-calendar-head
 	url = https://github.com/vim-scripts/calendar.vim--Matsumoto.git
+[submodule "bundle/minibufexpl-head"]
+	path = bundle/minibufexpl-head
+	url = https://github.com/fholgado/minibufexpl.vim.git
