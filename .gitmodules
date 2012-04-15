@@ -40,3 +40,6 @@
 [submodule "bundle/vim-slime-head"]
 	path = bundle/vim-slime-head
 	url = https://github.com/jpalardy/vim-slime.git
+[submodule "bundle/minibufexpl-head"]
+	path = bundle/minibufexpl-head
+	url = https://github.com/fholgado/minibufexpl.vim.git
