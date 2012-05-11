@@ -40,12 +40,12 @@
 [submodule "bundle/vim-slime-head"]
 	path = bundle/vim-slime-head
 	url = https://github.com/jpalardy/vim-slime.git
-[submodule "bundle/minibufexpl-head"]
-	path = bundle/minibufexpl-head
-	url = https://github.com/fholgado/minibufexpl.vim.git
 [submodule "bundle/vim-fugitive-head"]
 	path = bundle/vim-fugitive-head
 	url = https://github.com/tpope/vim-fugitive.git
 [submodule "bundle/vim-rails-head"]
 	path = bundle/vim-rails-head
 	url = git://github.com/tpope/vim-rails.git
+[submodule "bundle/supertab-head"]
+	path = bundle/supertab-head
+	url = https://github.com/ervandew/supertab.git

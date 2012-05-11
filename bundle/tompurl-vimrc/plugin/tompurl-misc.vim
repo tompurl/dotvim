@@ -83,3 +83,9 @@ set foldmethod=indent
 set foldnestmax=10
 set nofoldenable
 set foldlevel=1
+
+""" Turn on omnicompletion
+set ofu=syntaxcomplete#Complete
+
+""" Supertab
+"let g:SuperTabSetDefaultCompletionType = "":
