@@ -1,11 +1,11 @@
 # FILE:     autoload/conque_term/conque_globals.py
 # AUTHOR:   Nico Raffo <nicoraffo@gmail.com>
 # WEBSITE:  http://conque.googlecode.com
-# MODIFIED: __MODIFIED__
-# VERSION:  __VERSION__, for Vim 7.0
+# MODIFIED: 2011-09-02
+# VERSION:  2.3, for Vim 7.0
 # LICENSE:
 # Conque - Vim terminal/console emulator
-# Copyright (C) 2009-__YEAR__ Nico Raffo
+# Copyright (C) 2009-2011 Nico Raffo
 #
 # MIT License
 #
@@ -30,10 +30,10 @@
 """Common global constants and functions for Conque."""
 
 import sys
-import os
 import re
-import logging # DEBUG
-import traceback # DEBUG
+
+
+
 
 # PYTHON VERSION
 CONQUE_PYTHON_VERSION = sys.version_info[0]
@@ -41,15 +41,16 @@ CONQUE_PYTHON_VERSION = sys.version_info[0]
 # Encoding
 
 try:
-    import vim
     # Vim's character encoding
+    import vim
     CONQUE_VIM_ENCODING = vim.eval('&encoding')
 
 except:
     CONQUE_VIM_ENCODING = 'utf-8'
 
+
 def u(str_val, str_encoding='utf-8', errors='strict'):
-    """foolhardy attempt to make unicode string syntax compatible with both python 2 and 3"""
+    """ Foolhardy attempt to make unicode string syntax compatible with both python 2 and 3. """
 
     if not str_val:
         str_val = ''
@@ -61,7 +62,7 @@ def u(str_val, str_encoding='utf-8', errors='strict'):
         return unicode(str_val, str_encoding, errors)
 
 def uchr(str):
-    """foolhardy attempt to make unicode string syntax compatible with both python 2 and 3"""
+    """ Foolhardy attempt to make unicode string syntax compatible with both python 2 and 3. """
 
     if CONQUE_PYTHON_VERSION == 3:
         return chr(str)
@@ -72,19 +73,19 @@ def uchr(str):
 
 # Logging
 
-# enable logging # DEBUG
-CONQUE_LOG_FILENAME = None # DEBUG
-if os.path.exists('/home/nraffo/.vim/'): # DEBUG
-    CONQUE_LOG_FILENAME = '/home/nraffo/.vim/pylog.log' # DEBUG
-elif os.path.exists('C:/Documents and Settings/nraffo/vimfiles/'): # DEBUG
-    CONQUE_LOG_FILENAME = 'C:/Documents and Settings/nraffo/vimfiles/pylog.log' # DEBUG
-elif os.path.exists('/Users/nraffo/vimfiles/'): # DEBUG
-    CONQUE_LOG_FILENAME = '/Users/nraffo/vimfiles/pylog.log' # DEBUG
 
-CONQUE_LOG_LEVEL = logging.INFO #DEBUG
 
-if CONQUE_LOG_FILENAME: # DEBUG
-    logging.basicConfig(filename=CONQUE_LOG_FILENAME, level=CONQUE_LOG_LEVEL) # DEBUG
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Unix escape sequence settings
@@ -292,7 +293,7 @@ CONQUE_SOLE_RESIZE_SIZE = 255
 
 # interval of screen redraw
 # larger number means less frequent
-CONQUE_SOLE_SCREEN_REDRAW = 100
+CONQUE_SOLE_SCREEN_REDRAW = 50
 
 # interval of full buffer redraw
 # larger number means less frequent
@@ -316,4 +317,3 @@ CONQUE_WIN32_REGEX_ATTR = re.compile("((.)\\2*)", re.DOTALL)
 CONQUE_VK_ATTR_CTRL_PRESSED = u('1024')
 
 
-# vim:foldmethod=marker

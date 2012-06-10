@@ -1,11 +1,11 @@
 # FILE:     autoload/conque_term/conque_win32_util.py
 # AUTHOR:   Nico Raffo <nicoraffo@gmail.com>
 # WEBSITE:  http://conque.googlecode.com
-# MODIFIED: __MODIFIED__
-# VERSION:  __VERSION__, for Vim 7.0
+# MODIFIED: 2011-09-02
+# VERSION:  2.3, for Vim 7.0
 # LICENSE:
 # Conque - Vim terminal/console emulator
-# Copyright (C) 2009-__YEAR__ Nico Raffo
+# Copyright (C) 2009-2011 Nico Raffo
 #
 # MIT License
 #
@@ -27,7 +27,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-"""Python constants and structures used for ctypes interaction"""
+""" Python constants and structures used for ctypes interaction. """
 
 from ctypes import *
 
@@ -46,8 +46,8 @@ CREATE_SEPARATE_WOW_VDM = 0x00000800
 CREATE_SHARED_WOW_VDM = 0x00001000
 CREATE_SUSPENDED = 0x00000004
 CREATE_UNICODE_ENVIRONMENT = 0x00000400
-DEBUG_ONLY_THIS_PROCESS = 0x00000002
-DEBUG_PROCESS = 0x00000001
+
+
 DETACHED_PROCESS = 0x00000008
 EXTENDED_STARTUPINFO_PRESENT = 0x00080000
 INHERIT_PARENT_AFFINITY = 0x00010000
@@ -446,4 +446,3 @@ class INPUT_RECORD(Structure):
         return ''
 
 
-# vim:foldmethod=marker

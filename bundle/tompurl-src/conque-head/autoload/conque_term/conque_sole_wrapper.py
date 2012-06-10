@@ -1,11 +1,11 @@
 # FILE:     autoload/conque_term/conque_sole_wrapper.py 
 # AUTHOR:   Nico Raffo <nicoraffo@gmail.com>
 # WEBSITE:  http://conque.googlecode.com
-# MODIFIED: __MODIFIED__
-# VERSION:  __VERSION__, for Vim 7.0
+# MODIFIED: 2011-09-02
+# VERSION:  2.3, for Vim 7.0
 # LICENSE:
 # Conque - Vim terminal/console emulator
-# Copyright (C) 2009-__YEAR__ Nico Raffo
+# Copyright (C) 2009-2011 Nico Raffo
 #
 # MIT License
 #
@@ -28,6 +28,7 @@
 # THE SOFTWARE.
 
 """ 
+
 ConqueSoleSubprocessWrapper
 
 Subprocess wrapper to deal with Windows insanity. Launches console based python,
@@ -53,7 +54,6 @@ class ConqueSoleWrapper():
     bucket = None
 
     # console size
-    # NOTE: columns should never change after open() is called
     lines = 24
     columns = 80
 
@@ -71,8 +71,16 @@ class ConqueSoleWrapper():
 
 
     def open(self, cmd, lines, columns, python_exe='python.exe', communicator_py='conque_sole_communicator.py', options={}):
-        """ run communicator process which will in turn run cmd """
+        """ Launch python.exe subprocess which will in turn launch the user's program.
 
+        Arguments:
+        cmd -- The user's command to run. E.g. "Powershell.exe" or "C:\Python27\Scripts\ipython.bat"
+        lines, columns -- The size of the console, also the size of the Vim buffer
+        python.exe -- The path to the python executable, typically C:\PythonXX\python.exe
+        communicator_py -- The path to the subprocess controller script in the user's vimfiles directory
+        options -- optional configuration
+
+        """
         self.lines = lines
         self.columns = columns
         self.bucket = u('')
@@ -82,7 +90,7 @@ class ConqueSoleWrapper():
 
         # python command
         cmd_line = '%s "%s" %s %d %d %d %d %s' % (python_exe, communicator_py, self.shm_key, int(self.columns), int(self.lines), int(options['CODE_PAGE']), int(CONQUE_FAST_MODE), cmd)
-        logging.info('python command: ' + cmd_line)
+
 
         # console window attributes
         flags = NORMAL_PRIORITY_CLASS | DETACHED_PROCESS | CREATE_UNICODE_ENVIRONMENT
@@ -93,25 +101,28 @@ class ConqueSoleWrapper():
         try:
             res = ctypes.windll.kernel32.CreateProcessW(None, u(cmd_line), None, None, 0, flags, None, u('.'), ctypes.byref(si), ctypes.byref(pi))
         except:
-            logging.info('COULD NOT START %s' % cmd_line)
+
             raise
 
         # handle
         self.pid = pi.dwProcessId
 
-        logging.info('communicator pid: ' + str(self.pid))
+
 
         # init shared memory objects
         self.init_shared_memory(self.shm_key)
 
 
     def read(self, start_line, num_lines, timeout=0):
-        """ read output from shared memory """
+        """ Read a range of console lines from shared memory. 
 
+        Returns a pair of lists containing the console text and console text attributes.
+
+        """
         # emulate timeout by sleeping timeout time
         if timeout > 0:
             read_timeout = float(timeout) / 1000
-            #logging.debug("sleep " + str(read_timeout) + " seconds")
+
             time.sleep(read_timeout)
 
         output = []
@@ -127,13 +138,13 @@ class ConqueSoleWrapper():
 
 
     def get_stats(self):
-        """ get current cursor/scroll position """
+        """ Return a dictionary with current console cursor and scrolling information. """
 
         try:
             rescroll = self.shm_rescroll.read()
             if rescroll != '' and rescroll != None:
-                logging.debug('cmd found')
-                logging.debug(str(rescroll))
+
+
 
                 self.shm_rescroll.clear()
 
@@ -146,7 +157,7 @@ class ConqueSoleWrapper():
                     self.shm_attributes = None
 
                 # reallocate memory
-                logging.debug('new output size: ' + str(CONQUE_SOLE_BUFFER_LENGTH * self.columns * rescroll['data']['blocks']) + ' = ' + rescroll['data']['mem_key'])
+
                 self.shm_output = ConqueSoleSharedMemory(CONQUE_SOLE_BUFFER_LENGTH * self.columns * rescroll['data']['blocks'], 'output', rescroll['data']['mem_key'], True)
                 self.shm_output.create('read')
 
@@ -160,14 +171,14 @@ class ConqueSoleWrapper():
             else:
                 return False
         except:
-            logging.info(traceback.format_exc())
+
             return False
 
         return self.stats
 
 
     def is_alive(self):
-        """ get process status """
+        """ Get process status. """
 
         if not self.shm_stats:
             return True
@@ -180,47 +191,47 @@ class ConqueSoleWrapper():
 
 
     def write(self, text):
-        """ write input to shared memory """
+        """ Write input to shared memory. """
 
         self.bucket += text
 
         istr = self.shm_input.read()
 
         if istr == '':
-            logging.debug('input shm is empty, writing')
+
             self.shm_input.write(self.bucket[:500])
             self.bucket = self.bucket[500:]
 
 
     def write_vk(self, vk_code):
-        """ write virtual key code to shared memory using proprietary escape seq """
+        """ Write virtual key code to shared memory using proprietary escape sequences. """
 
         seq = u("\x1b[") + u(str(vk_code)) + u("VK")
         self.write(seq)
 
 
     def idle(self):
-        """ idle """
+        """ Write idle command to shared memory block, so subprocess controller can hibernate. """
 
-        logging.info('writing idle shm')
+
         self.shm_command.write({'cmd': 'idle', 'data': {}})
 
 
     def resume(self):
-        """ resume """
+        """ Write resume command to shared memory block, so subprocess controller can wake up. """
 
         self.shm_command.write({'cmd': 'resume', 'data': {}})
 
 
     def close(self):
-        """ shut it all down """
+        """ Shut it all down. """
 
         self.shm_command.write({'cmd': 'close', 'data': {}})
         time.sleep(0.2)
 
 
     def window_resize(self, lines, columns):
-        """ resize console window """
+        """ Resize console window. """
 
         self.lines = lines
 
@@ -232,7 +243,7 @@ class ConqueSoleWrapper():
 
 
     def init_shared_memory(self, mem_key):
-        """ create shared memory objects """
+        """ Create shared memory objects. """
 
         self.shm_input = ConqueSoleSharedMemory(CONQUE_SOLE_INPUT_SIZE, 'input', mem_key)
         self.shm_input.create('write')

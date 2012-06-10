@@ -49,3 +49,9 @@
 [submodule "bundle/supertab-head"]
 	path = bundle/supertab-head
 	url = https://github.com/ervandew/supertab.git
+[submodule "bundle/vim-ruby-conque"]
+	path = bundle/vim-ruby-conque
+	url = git://github.com/skwp/vim-ruby-conque.git
+[submodule "bundle/vim-powerline"]
+	path = bundle/vim-powerline
+	url = git://github.com/Lokaltog/vim-powerline.git

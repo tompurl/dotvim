@@ -89,3 +89,8 @@ set ofu=syntaxcomplete#Complete
 
 """ Supertab
 "let g:SuperTabSetDefaultCompletionType = "":
+
+""" Powerline
+set laststatus=2
+set encoding=utf-8
+let g:Powerline_symbols = 'fancy'
