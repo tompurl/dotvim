@@ -55,3 +55,6 @@
 [submodule "bundle/vim-powerline"]
 	path = bundle/vim-powerline
 	url = git://github.com/Lokaltog/vim-powerline.git
+[submodule "bundle/vim-taglist-head"]
+	path = bundle/vim-taglist-head
+	url = git://github.com/thisivan/vim-taglist.git
