@@ -81,8 +81,9 @@ augroup END
 """ folding
 set foldmethod=indent
 set foldnestmax=10
-set nofoldenable
-set foldlevel=1
+"set nofoldenable
+set foldlevel=2
+set foldcolumn=5
 
 """ Turn on omnicompletion
 set ofu=syntaxcomplete#Complete
@@ -94,3 +95,4 @@ set ofu=syntaxcomplete#Complete
 set laststatus=2
 set encoding=utf-8
 let g:Powerline_symbols = 'fancy'
+
