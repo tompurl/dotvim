@@ -7,6 +7,7 @@ augroup filetype_markdown
     " Add an autocommand that would be useful
     " The turns on spell check in all of my markdown documents.
     autocmd FileType markdown setlocal spell
+    autocmd BufRead,BufNewFile *.markdown,*.md setlocal filetype=markdown
 
     """" LVSTHW Chapter 13 Exercises
     " Create a \"snippet\" abbreviation 
@@ -24,6 +25,26 @@ augroup filetype_markdown
 
     """" Create Images
     autocmd FileType markdown iabbrev <buffer> ni ![TODO Alt text](/images/TODO "TODO Optional title")<esc>bbbbbbve
+
+    """ Headers
+    au FileType markdown nnoremap <buffer><leader>h1 ^i# <esc><cr>
+    au FileType markdown inoremap <buffer><leader>h1 <esc>^i# <esc><cr>
+    au FileType markdown nnoremap <buffer><leader>h2 ^i## <esc><cr>
+    au FileType markdown inoremap <buffer><leader>h2 <esc>^i## <esc><cr>
+    au FileType markdown nnoremap <buffer><leader>h3 ^i### <esc><cr>
+    au FileType markdown inoremap <buffer><leader>h3 <esc>^i### <esc><cr>
+    au FileType markdown nnoremap <buffer><leader>h4 ^i#### <esc><cr>
+    au FileType markdown inoremap <buffer><leader>h4 <esc>^i#### <esc><cr>
+    au FileType markdown nnoremap <buffer><leader>h5 ^i##### <esc><cr>
+    au FileType markdown inoremap <buffer><leader>h5 <esc>^i##### <esc><cr>
+    
+    """ Preformmated text
+    au FileType markdown iabbrev pf ``<esc>i
+
+    au FileType markdown inoremap <buffer><C-b> **
+
+    """ Insert image
+    au FileType markdown iabbrev iii ![Alt text](/path/to/img.jpg) 
 
 augroup END
 

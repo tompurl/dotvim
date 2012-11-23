@@ -55,3 +55,18 @@
 [submodule "bundle/vim-taglist-head"]
 	path = bundle/vim-taglist-head
 	url = git://github.com/thisivan/vim-taglist.git
+[submodule "bundle/puppet-vim-head"]
+	path = bundle/puppet-vim-head
+	url = git://github.com/rodjek/vim-puppet.git
+[submodule "bundle/clam-head"]
+	path = bundle/clam-head
+	url = https://github.com/sjl/clam.vim.git
+[submodule "bundle/perl-supprt-head"]
+	path = bundle/perl-supprt-head
+	url = git://github.com/benizi/perl-support.vim.git
+[submodule "bundle/vim-perl-head"]
+	path = bundle/vim-perl-head
+	url = git://github.com/petdance/vim-perl.git
+[submodule "bundle/riv-head"]
+	path = bundle/riv-head
+	url = git://github.com/Rykka/riv.vim.git

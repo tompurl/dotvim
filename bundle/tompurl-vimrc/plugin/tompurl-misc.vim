@@ -13,6 +13,8 @@ else
     let &verbosefile = "/tmp/vim_debug.out"
 endif
 
+:inoremap jj <esc>
+
 :map <leader>en :cd %:p:h <Bar> new<Space>
 set shortmess=a "no more hitting enter to continue
 map <leader>ma <ESC>:set filetype=mail<CR>
@@ -29,7 +31,7 @@ iabbrev ts  <ESC>"=strftime("@ %T")<CR>PA
 "Open this file from any other file
 "Only works on Linux/Mac
 let myvimrc = "$HOME/.vim/bundle/tompurl-vimrc/plugin/tompurl-misc.vim"
-:nnoremap <leader>ev :execute "vsplit " . myvimrc <cr>
+:nnoremap <leader>ev :execute "split " . myvimrc <cr>
 :nnoremap <leader>sv :execute "source " . myvimrc <cr>
 
 "Some simple abbreviations
@@ -96,3 +98,18 @@ set laststatus=2
 set encoding=utf-8
 let g:Powerline_symbols = 'fancy'
 
+""" Puppet stuff
+augroup filetype_puppet
+  autocmd!
+
+  autocmd BufNewFile,BufRead *.pp set filetype=puppet
+
+augroup END
+
+""" JSON stuff
+augroup filetype_json
+    autocmd!
+    "autocmd FileType json nnoremap <leader>li execute !cat % | python -mjson.tool
+augroup END
+
+vnoremap <leader>bb ovi**gvOvllli** 

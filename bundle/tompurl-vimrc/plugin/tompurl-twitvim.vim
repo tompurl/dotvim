@@ -1,5 +1,6 @@
 "let twitvim_filter_regex = '@GetGlue\|/youtu\.be/'
-let twitvim_filter_regex = '@GetGlue'
+let twitvim_filter_enable = 1
+let twitvim_filter_regex = 'anildash'
 let twitvim_count = 50
 
 " Open twitvim cheat sheet
