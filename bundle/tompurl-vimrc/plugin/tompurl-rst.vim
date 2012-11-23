@@ -4,17 +4,17 @@ augroup filetypedetect_rst
     au FileType rst nnoremap <leader>h1 ^yypv$r=o<cr><esc>
     au FileType rst inoremap <leader>h1 <esc>^yypv$r=o<cr>
 
-    au FileType rst nnoremap <leader>h2 ^yypv$r-o.. {{{1<cr><cr><cr><cr><cr><cr>.. }}}1<esc>kkkk
-    au FileType rst inoremap <leader>h2 <esc>^yypv$r-o.. {{{1<cr><cr><cr><cr><cr><cr>.. }}}1<esc>kkkki
+    au FileType rst nnoremap <leader>h2 ^yypv$r-o<cr><cr><cr><cr><cr><cr><esc>kkkk
+    au FileType rst inoremap <leader>h2 <esc>^yypv$r-o<cr><cr><cr><cr><cr><cr><esc>kkkki
 
-    au FileType rst nnoremap <leader>h3 ^yypv$r+o.. {{{2<cr><cr><cr><cr><cr><cr>.. }}}2<esc>kkkk
-    au FileType rst inoremap <leader>h3 <esc>^yypv$r+o.. {{{2<cr><cr><cr><cr><cr><cr>.. }}}2<esc>kkkki
+    au FileType rst nnoremap <leader>h3 ^yypv$r+o<cr><cr><cr><cr><cr><cr><esc>kkkk
+    au FileType rst inoremap <leader>h3 <esc>^yypv$r+o<cr><cr><cr><cr><cr><cr><esc>kkkki
 
-    au FileType rst nnoremap <leader>h4 ^yypv$r~o.. {{{3<cr><cr><cr><cr><cr><cr>.. }}}3<esc>kkkk
-    au FileType rst inoremap <leader>h4 <esc>^yypv$r~o.. {{{3<cr><cr><cr><cr><cr><cr>.. }}}3<esc>kkkki
+    au FileType rst nnoremap <leader>h4 ^yypv$r~o<cr><cr><cr><cr><cr><cr><esc>kkkk
+    au FileType rst inoremap <leader>h4 <esc>^yypv$r~o<cr><cr><cr><cr><cr><cr><esc>kkkki
 
-    au FileType rst nnoremap <leader>h5 ^yypv$r*o.. {{{4<cr><cr><cr><cr><cr><cr>.. }}}4<esc>kkkk
-    au FileType rst inoremap <leader>h5 <esc>^yypv$r*o.. {{{4<cr><cr><cr><cr><cr><cr>.. }}}4<esc>kkkki
+    au FileType rst nnoremap <leader>h5 ^yypv$r*o<cr><cr><cr><cr><cr><cr><esc>kkkk
+    au FileType rst inoremap <leader>h5 <esc>^yypv$r*o<cr><cr><cr><cr><cr><cr><esc>kkkki
     """Make Link (ml)
     " Highlight a word or phrase and it creates a link and opens a split so
     " you can edit the url separately. Once you are done editing the link,
