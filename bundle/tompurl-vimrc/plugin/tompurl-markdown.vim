@@ -39,9 +39,10 @@ augroup filetype_markdown
     au FileType markdown inoremap <buffer><leader>h5 <esc>^i##### <esc><cr>
     
     """ Preformmated text
-    au FileType markdown iabbrev pf ``<esc>i
+    au FileType markdown inoremap <buffer><leader>pf ``
 
-    au FileType markdown inoremap <buffer><C-b> **
+    """ Bold text
+    au FileType markdown inoremap <buffer><leader>bb **
 
     """ Insert image
     au FileType markdown iabbrev iii ![Alt text](/path/to/img.jpg) 
