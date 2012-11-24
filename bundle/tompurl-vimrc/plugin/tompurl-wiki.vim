@@ -28,6 +28,8 @@ augroup filetypedetect_wiki
     "au FileType vimwiwki inoremap <leader>h6 <esc>bi[[<esc>A]]<esc>
     " TODO Fix extra space
     au FileType vimwiki iabbrev pf ``<esc>i
+    " Create a worklog stub for today's date.
+    au FileType vimwiki iabbrev newday ==  <ESC>"=strftime("%m/%d/%Y")<CR>PA==<CR>{{{1<CR><CR><CR><CR><CR><CR><CR><CR><CR><CR><CR>}}}1<ESC>kkkkkkkkki
 augroup END
 
 "Wiki sig scripts
