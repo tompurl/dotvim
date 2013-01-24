@@ -26,6 +26,8 @@ set visualbell
 "imap <leader>ts <ESC>"=strftime("@ %H:%M")<CR>Pi
 iabbrev dts <ESC>"=strftime("%y/%m/%d @ %T")<CR>PA
 iabbrev ts  <ESC>"=strftime("@ %T")<CR>PA
+nnoremap <leader>tsh  "=strftime("%T")<CR>P
+inoremap <leader>tsh  <ESC>"=strftime("%T")<CR>PA
 
 
 "Open this file from any other file

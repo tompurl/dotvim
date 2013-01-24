@@ -24,12 +24,18 @@ augroup filetypedetect_wiki
     au FileType vimwiki inoremap <leader>h5 <esc>^i===== <esc>A =====<esc>^
     au FileType vimwiki nnoremap <leader>h6 ^i====== <esc>A ======<esc>^
     au FileType vimwiki inoremap <leader>h6 <esc>^i====== <esc>A ======<esc>^
-    "au FileType vimwiwki nnoremap <leader>wm bi[[<esc>A]]<esc>
-    "au FileType vimwiwki inoremap <leader>h6 <esc>bi[[<esc>A]]<esc>
-    " TODO Fix extra space
-    au FileType vimwiki iabbrev pf ``<esc>i
+    " preformatted text
+    au FileType vimwiki inoremap <leader>pf ``
+    " Bold
+    au FileType vimwiki inoremap <leader>bb *
+    " Italics
+    au FileType vimwiki inoremap <leader>ii _
     " Create a worklog stub for today's date.
-    au FileType vimwiki iabbrev newday ==  <ESC>"=strftime("%m/%d/%Y")<CR>PA==<CR>{{{1<CR><CR><CR><CR><CR><CR><CR><CR><CR><CR><CR>}}}1<ESC>kkkkkkkkki
+    au FileType vimwiki iabbrev newday ==  <ESC>"=strftime("%m/%d/%Y")<CR>PA==<CR>%% {{{1<CR><CR><CR><CR><CR><CR><CR><CR><CR><CR><CR>%% }}}1<ESC>kkkkkkkkki
+    " Header (or what I call Yaml Front Matter)
+    au FileType vimwiki iabbrev yfm %toc<CR><CR>
+    " make link
+    au FileType vimwiki vnoremap <leader>ml vli]<ESC>gvovi[<space><esc>i
 augroup END
 
 "Wiki sig scripts

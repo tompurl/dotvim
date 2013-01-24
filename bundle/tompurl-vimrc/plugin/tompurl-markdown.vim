@@ -47,5 +47,8 @@ augroup filetype_markdown
     """ Insert image
     au FileType markdown iabbrev iii ![Alt text](/path/to/img.jpg) 
 
+    """ Octopress stuff
+    au FileType markdown iabbre ccc {% codeblock lang:??? %}<CR><CR><CR><CR>{% endcodeblock %}<ESC>^kki
+
 augroup END
 

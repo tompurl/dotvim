@@ -70,3 +70,12 @@
 [submodule "bundle/riv-head"]
 	path = bundle/riv-head
 	url = git://github.com/Rykka/riv.vim.git
+[submodule "bundle/vim-rake-head"]
+	path = bundle/vim-rake-head
+	url = git://github.com/tpope/vim-rake.git
+[submodule "bundle/vim-bundler-head"]
+	path = bundle/vim-bundler-head
+	url = git://github.com/tpope/vim-bundler.git
+[submodule "bundle/vim-ruby-conque-head"]
+	path = bundle/vim-ruby-conque-head
+	url = git://github.com/skwp/vim-ruby-conque.git
