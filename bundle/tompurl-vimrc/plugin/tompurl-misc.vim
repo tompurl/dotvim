@@ -13,7 +13,8 @@ else
     let &verbosefile = "/tmp/vim_debug.out"
 endif
 
-:inoremap jj <esc>
+":inoremap jj <esc>
+inoremap uu <esc>
 
 :map <leader>en :cd %:p:h <Bar> new<Space>
 set shortmess=a "no more hitting enter to continue
